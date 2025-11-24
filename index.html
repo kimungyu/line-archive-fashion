@@ -59,14 +59,14 @@
       pointer-events: none;
     }
 
-    /* ===== 배경 톤 + 블러 (처음 버전) ===== */
+    /* ===== 배경 톤 + 블러 ===== */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       z-index: -1;
-      background: rgba(246, 245, 243, 0.80); /* 살짝 밝은 베이지 */
-      backdrop-filter: blur(2px);            /* 부드러운 블러 */
+      background: rgba(246, 245, 243, 0.80);
+      backdrop-filter: blur(2px);
     }
 
     /* ===== 레이아웃 ===== */
@@ -110,7 +110,6 @@
       letter-spacing: 0.14em;
     }
 
-    /* 네비 링크를 패션브랜드 느낌으로 */
     .nav-links a {
       position: relative;
       padding-bottom: 4px;
@@ -462,61 +461,61 @@
       color: #dddddd;
     }
 
-    /* ===== 반응형 ===== */
+    /* ===== 모바일 반응형 ===== */
     @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
+      .page-wrapper {
+        padding: 0 14px 40px;
+        max-width: 480px;
+        margin: 0 auto;
       }
 
-      .brand-story {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
         grid-template-columns: 1fr;
+        gap: 24px;
+        padding-top: 26px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .hero-subtitle {
+        font-size: 13px;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 14px;
       }
 
       .lookbook-grid {
         grid-template-columns: 1fr;
         grid-auto-rows: 220px;
+        gap: 14px;
       }
 
       .lookbook-item.tall {
         grid-row: span 1;
       }
 
-      .grid-3 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .info-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      .nav-links {
-        display: none;
-      }
-
-      .hero-title {
-        font-size: 28px;
-      }
-
-      .hero {
-        padding-top: 26px;
-      }
-
-      .grid-3 {
-        grid-template-columns: 1fr;
-      }
-
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .page-wrapper {
-        padding: 0 16px 40px;
-      }
-
       .brand-story {
-        padding: 18px 16px;
+        grid-template-columns: 1fr;
+        padding: 18px 14px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .music-toggle {
+        bottom: 16px;
+        right: 16px;
+        padding: 6px 12px;
+        font-size: 10px;
       }
     }
   </style>
@@ -526,7 +525,7 @@
   <!-- 전체 배경 영상 -->
   <video class="site-bg-video" src="bg-main.mp4" autoplay muted loop playsinline></video>
 
-  <!-- 배경 음악 (처음 자동재생 시도) -->
+  <!-- 배경 음악 -->
   <audio id="bgMusic" src="bg-music.mp3" loop autoplay></audio>
 
   <!-- 음악 토글 버튼 -->
@@ -799,7 +798,7 @@
     </section>
   </main>
 
-  <!-- 음악 자동 재생 + 토글 스크립트 -->
+  <!-- 음악 자동 재생 + 토글 스크립트 (모바일 터치 대응 포함) -->
   <script>
     const bgMusic = document.getElementById("bgMusic");
     const musicToggle = document.getElementById("musicToggle");
@@ -817,7 +816,7 @@
 
     function safePlay() {
       if (!bgMusic) return;
-      bgMusic.volume = 0.65; // 볼륨 0~1
+      bgMusic.volume = 0.65; // 볼륨 (0~1)
       bgMusic.play().then(updateButton).catch(() => {
         updateButton();
       });
@@ -834,20 +833,30 @@
       }
     }
 
-    // 유저 첫 상호작용에서 자동 재생 시도 (브라우저 정책 우회)
-    function startMusicOnce() {
-      if (!bgMusic || !bgMusic.paused) return;
-      safePlay();
+    function removeStartListeners() {
       window.removeEventListener("click", startMusicOnce);
       window.removeEventListener("scroll", startMusicOnce);
       window.removeEventListener("keydown", startMusicOnce);
       window.removeEventListener("touchstart", startMusicOnce);
+      window.removeEventListener("touchend", startMusicOnce);
     }
 
+    // 첫 상호작용(PC/모바일)에서 재생 시도
+    function startMusicOnce() {
+      if (!bgMusic || !bgMusic.paused) {
+        removeStartListeners();
+        return;
+      }
+      safePlay();
+      removeStartListeners();
+    }
+
+    // 이벤트 등록 (PC + 모바일 터치 모두 대응)
     window.addEventListener("click", startMusicOnce);
     window.addEventListener("scroll", startMusicOnce);
     window.addEventListener("keydown", startMusicOnce);
-    window.addEventListener("touchstart", startMusicOnce);
+    window.addEventListener("touchstart", startMusicOnce, { passive: true });
+    window.addEventListener("touchend", startMusicOnce, { passive: true });
 
     if (musicToggle) {
       musicToggle.addEventListener("click", toggleMusic);
