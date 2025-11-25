@@ -2,867 +2,619 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>LINE ARCHIVE – Contemporary Fashion Select Shop</title>
+  <title>LINE ARCHIVE – Portfolio 2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="미니멀 & 컨템포러리 의류 셀렉샵 LINE ARCHIVE – 시즌 신상, 베스트셀러, 룩북까지 한눈에 보는 패션 포트폴리오." />
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-
   <style>
-    :root {
-      --background: #f6f5f3;
-      --card-bg: #ffffff;
-      --text-main: #151515;
-      --text-sub: #666666;
-      --accent: #d4b08c;
-      --border-soft: #e2dfda;
-      --nav-bg: rgba(246, 245, 243, 0.92);
-    }
-
+    /* ====== 기본 리셋 ====== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    html,
     body {
-      font-family: "Inter", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text-main);
-      line-height: 1.6;
-      position: relative;
+      height: 100%;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Pretendard",
+        "Noto Sans KR", sans-serif;
+      color: #f5f7fa;
+      background: #05070a;
+      overflow-x: hidden;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .card-link {
-      display: block;
-      color: inherit;
-    }
-
-    /* ===== 전체 배경 영상 ===== */
-    .site-bg-video {
+    /* ====== 배경 비디오 & 오버레이 ====== */
+    #bg-video {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       z-index: -2;
-      pointer-events: none;
     }
 
-    /* ===== 배경 톤 + 블러 ===== */
-    body::before {
-      content: "";
+    .bg-overlay {
       position: fixed;
       inset: 0;
+      background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.75),
+          rgba(0, 0, 0, 0.95)
+        ),
+        radial-gradient(circle at top, rgba(0, 120, 255, 0.25), transparent);
+      backdrop-filter: blur(6px);
       z-index: -1;
-      background: rgba(246, 245, 243, 0.80);
-      backdrop-filter: blur(2px);
     }
 
-    /* ===== 레이아웃 ===== */
-    .page-wrapper {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px 60px;
-    }
-
-    /* ===== 헤더 / 네비게이션 ===== */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(16px);
-      background: var(--nav-bg);
-      border-bottom: 1px solid var(--border-soft);
-    }
-
-    .nav-bar {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 16px 20px;
+    /* ====== 메인 컨테이너 (모바일 정리 포인트) ====== */
+    .page {
+      min-height: 100vh;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
+      justify-content: center;
     }
 
-    .logo {
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      font-size: 14px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-    }
-
-    .nav-links a {
-      position: relative;
-      padding-bottom: 4px;
-      font-weight: 500;
-      color: #1a1a1a;
-      transition: color 0.25s ease;
-    }
-
-    .nav-links a:hover {
-      color: #000000;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0%;
-      height: 1.8px;
-      background: #000000;
-      transition: width 0.25s ease;
-    }
-
-    .nav-links a:hover::after {
+    .page-inner {
       width: 100%;
+      max-width: 480px; /* ★ 폰에서 너무 커지지 않도록 고정 폭 */
+      padding: 16px 16px 80px;
     }
 
-    /* ===== HERO ===== */
+    /* ====== 헤더 / 네비 ====== */
+    .brand-logo {
+      font-size: 1.4rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #f7f9ff;
+      opacity: 0.9;
+    }
+
+    .brand-sub {
+      font-size: 0.75rem;
+      color: #8fa3c3;
+      margin-top: 4px;
+    }
+
+    header {
+      margin-bottom: 18px;
+    }
+
+    nav {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #c0d4ff;
+      background: rgba(7, 19, 40, 0.85);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(63, 106, 255, 0.35);
+      backdrop-filter: blur(10px);
+      transition: background 0.2s ease, transform 0.1s ease,
+        border-color 0.2s ease;
+    }
+
+    nav a:hover {
+      background: rgba(63, 106, 255, 0.9);
+      border-color: rgba(166, 197, 255, 0.8);
+      transform: translateY(-1px);
+      color: #f8fbff;
+    }
+
+    /* ====== Hero ====== */
     .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 36px;
-      padding: 40px 0 36px;
-      border-bottom: 1px solid var(--border-soft);
-    }
-
-    .hero-text {
+      margin-top: 14px;
+      margin-bottom: 20px;
+      padding: 14px 14px 16px;
+      border-radius: 18px;
+      background: radial-gradient(
+          circle at top left,
+          rgba(111, 154, 255, 0.38),
+          transparent 60%
+        ),
+        rgba(3, 6, 18, 0.85);
+      border: 1px solid rgba(118, 158, 255, 0.35);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      gap: 20px;
+      gap: 10px;
     }
 
-    .hero-label {
-      font-size: 12px;
+    .hero-topline {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--text-sub);
+      color: #c8d7ff;
+      opacity: 0.9;
     }
 
     .hero-title {
-      font-size: 36px;
-      line-height: 1.1;
-      font-weight: 500;
+      font-size: 1.25rem;
+      line-height: 1.25;
+      color: #f8fbff;
+      margin-top: 2px;
     }
 
-    .hero-subtitle {
-      font-size: 14px;
-      color: var(--text-sub);
-      max-width: 420px;
+    .hero-tagline {
+      font-size: 0.8rem;
+      color: #c3d4f9;
+      margin-top: 6px;
     }
 
-    .hero-cta-group {
+    .hero-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .hero-pill {
+      font-size: 0.7rem;
+      color: #dde7ff;
+      background: rgba(8, 19, 55, 0.9);
+      border-radius: 999px;
+      padding: 4px 8px;
+      border: 1px solid rgba(117, 148, 255, 0.6);
+    }
+
+    .hero-cta {
       margin-top: 8px;
-    }
-
-    .btn-primary {
-      padding: 10px 22px;
-      border-radius: 999px;
-      border: 1px solid var(--text-main);
-      background: var(--text-main);
-      color: #ffffff;
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-
-    .btn-primary:hover {
-      background: #000000;
-    }
-
-    .btn-ghost {
-      padding: 10px 18px;
-      border-radius: 999px;
-      border: 1px solid var(--border-soft);
-      background: transparent;
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      color: var(--text-sub);
-      transition: border 0.2s ease;
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--text-main);
-    }
-
-    .hero-note {
-      font-size: 12px;
-      color: var(--text-sub);
-    }
-
-    .hero-image {
-      position: relative;
-      border-radius: 18px;
-      overflow: hidden;
-      background: #ddd;
-    }
-
-    .hero-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .hero-tag {
-      position: absolute;
-      left: 18px;
-      bottom: 18px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(21, 21, 21, 0.75);
-      color: #ffffff;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    /* ===== 공통 섹션 ===== */
-    section {
-      padding: 36px 0;
-      border-bottom: 1px solid var(--border-soft);
-    }
-
-    .section-header {
       display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      gap: 12px;
+      justify-content: flex-start;
+    }
+
+    .hero-cta button {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #3a7bff, #00c6ff);
+      color: #f7fbff;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.8);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-cta button span.icon {
+      font-size: 1rem;
+    }
+
+    /* ====== 섹션 기본 ====== */
+    section {
+      margin-bottom: 24px;
     }
 
     .section-title {
-      font-size: 18px;
-      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #c4d6ff;
+      margin-bottom: 10px;
     }
 
-    .section-sub {
-      font-size: 13px;
-      color: var(--text-sub);
+    .section-desc {
+      font-size: 0.72rem;
+      color: #92a4c8;
+      margin-bottom: 10px;
     }
 
-    /* ===== 상품 카드 ===== */
-    .grid-3 {
+    /* ====== 상품 그리드 (정리된 느낌) ====== */
+    .product-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
     }
 
     .product-card {
-      background: var(--card-bg);
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: rgba(5, 13, 32, 0.9);
       border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid var(--border-soft);
-      display: flex;
-      flex-direction: column;
+      padding: 8px;
+      border: 1px solid rgba(56, 90, 195, 0.7);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.85);
+      transition: transform 0.15s ease, box-shadow 0.15s ease,
+        border-color 0.15s ease, background 0.15s ease;
     }
 
-    .product-image {
-      aspect-ratio: 4 / 5;
-      background: #ddd;
-      overflow: hidden;
+    .product-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.9);
+      border-color: rgba(134, 176, 255, 0.9);
+      background: rgba(7, 20, 46, 0.95);
     }
 
-    .product-image img {
+    .product-image-wrapper {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 8px;
+      background: radial-gradient(
+        circle at top,
+        rgba(71, 104, 210, 0.8),
+        rgba(3, 7, 18, 0.9)
+      );
+    }
+
+    .product-image-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.3s ease;
+      display: block;
     }
 
-    .product-card:hover .product-image img {
-      transform: scale(1.03);
-    }
-
-    .product-body {
-      padding: 12px 14px 13px;
+    .product-info {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 2px;
     }
 
     .product-name {
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 0.8rem;
+      color: #eef3ff;
     }
 
     .product-meta {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      font-size: 12px;
-      color: var(--text-sub);
-      gap: 8px;
+      align-items: baseline;
+      margin-top: 2px;
     }
 
-    .price {
-      font-weight: 500;
+    .product-price {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #e5f0ff;
     }
 
-    .badge {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.13em;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #f2ebe4;
-      color: #7a5b3b;
-      white-space: nowrap;
+    .product-tag {
+      font-size: 0.7rem;
+      color: #8fa3d0;
     }
 
-    /* ===== 룩북 ===== */
-    .lookbook-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      grid-auto-rows: 200px;
-      gap: 16px;
-    }
-
-    .lookbook-item {
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border-soft);
-      background: #ddd;
-    }
-
-    .lookbook-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .lookbook-item:hover img {
-      transform: scale(1.04);
-    }
-
-    .lookbook-item.tall {
-      grid-row: span 2;
-    }
-
-    /* ===== 브랜드 스토리 ===== */
-    .brand-story {
-      background: var(--card-bg);
-      border-radius: 18px;
-      border: 1px solid var(--border-soft);
-      padding: 24px 22px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 20px;
-    }
-
-    .brand-story h3 {
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-
-    .brand-story p {
-      font-size: 13px;
-      color: var(--text-sub);
-    }
-
-    .brand-highlight {
-      font-size: 12px;
-      color: var(--text-sub);
-      border-left: 2px solid var(--accent);
-      padding-left: 12px;
-    }
-
-    /* ===== Info / Footer ===== */
-    footer {
-      padding-top: 24px;
-      font-size: 12px;
-      color: var(--text-sub);
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-
-    .info-card {
+    /* ====== 브랜드 스토리 / Info ====== */
+    .story-card {
+      background: rgba(3, 9, 26, 0.92);
       border-radius: 14px;
-      border: 1px solid var(--border-soft);
-      background: var(--card-bg);
-      padding: 12px 12px 11px;
+      padding: 12px;
+      border: 1px solid rgba(70, 104, 210, 0.7);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.9);
+      font-size: 0.75rem;
+      color: #c6d5ff;
+      line-height: 1.5;
     }
 
-    .info-title {
-      font-size: 12px;
-      font-weight: 500;
-      margin-bottom: 4px;
+    .story-card strong {
+      color: #e9f0ff;
     }
 
-    .info-text {
-      font-size: 12px;
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      border-top: 1px solid var(--border-soft);
-      padding-top: 14px;
-      margin-top: 4px;
-    }
-
-    .footer-bottom span {
-      font-size: 11px;
-    }
-
-    /* ===== 음악 토글 버튼 ===== */
+    /* ====== 음악 토글 버튼 ====== */
     .music-toggle {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      padding: 8px 14px;
-      border-radius: 999px;
+      right: 14px;
+      bottom: 14px;
+      z-index: 20;
       border: none;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      background: rgba(0, 0, 0, 0.72);
-      color: #ffffff;
+      outline: none;
       cursor: pointer;
-      z-index: 9999;
+      font-size: 0.75rem;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(5, 13, 32, 0.95);
+      color: #dce7ff;
+      border: 1px solid rgba(99, 134, 255, 0.8);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .music-toggle.off {
-      background: rgba(0, 0, 0, 0.45);
-      color: #dddddd;
+    .music-toggle span.icon {
+      font-size: 1rem;
     }
 
-    /* ===== 모바일 반응형 ===== */
-    @media (max-width: 900px) {
-      .page-wrapper {
-        padding: 0 14px 40px;
-        max-width: 480px;
-        margin: 0 auto;
-      }
+    /* ====== 푸터 ====== */
+    footer {
+      margin-top: 20px;
+      font-size: 0.68rem;
+      color: #7f8fb1;
+      text-align: center;
+    }
 
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 24px;
-        padding-top: 26px;
+    /* ====== 반응형 (더 작은 폰) ====== */
+    @media (max-width: 400px) {
+      .page-inner {
+        padding-inline: 12px;
       }
 
       .hero-title {
-        font-size: 24px;
+        font-size: 1.1rem;
       }
 
-      .hero-subtitle {
-        font-size: 13px;
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
       }
 
-      .grid-3 {
-        grid-template-columns: 1fr;
-        gap: 14px;
+      .product-name {
+        font-size: 0.75rem;
       }
 
-      .lookbook-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: 220px;
-        gap: 14px;
-      }
-
-      .lookbook-item.tall {
-        grid-row: span 1;
-      }
-
-      .brand-story {
-        grid-template-columns: 1fr;
-        padding: 18px 14px;
-      }
-
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .music-toggle {
-        bottom: 16px;
-        right: 16px;
-        padding: 6px 12px;
-        font-size: 10px;
+      .product-price {
+        font-size: 0.78rem;
       }
     }
   </style>
 </head>
 <body>
-
-  <!-- 전체 배경 영상 -->
-  <video class="site-bg-video" src="bg-main.mp4" autoplay muted loop playsinline></video>
+  <!-- 배경 영상 -->
+  <video id="bg-video" autoplay muted loop playsinline>
+    <source src="bg-main.mp4" type="video/mp4" />
+  </video>
+  <div class="bg-overlay"></div>
 
   <!-- 배경 음악 -->
-  <audio id="bgMusic" src="bg-music.mp3" loop autoplay></audio>
+  <audio id="bg-music" src="bg-music.mp3" loop></audio>
+  <button id="music-toggle" class="music-toggle">
+    <span class="icon">🎵</span>
+    <span class="label">Music: OFF</span>
+  </button>
 
-  <!-- 음악 토글 버튼 -->
-  <button id="musicToggle" class="music-toggle">🔊 MUSIC ON</button>
+  <main class="page">
+    <div class="page-inner">
+      <header>
+        <div class="brand-logo">LINE ARCHIVE</div>
+        <div class="brand-sub">Curated Select Shop Portfolio 02</div>
+        <nav>
+          <a href="#new">NEW ARRIVALS</a>
+          <a href="#best">BEST SELLERS</a>
+          <a href="#lookbook">LOOKBOOK</a>
+          <a href="#story">BRAND STORY</a>
+        </nav>
+      </header>
 
-  <header>
-    <nav class="nav-bar">
-      <div class="logo">LINE ARCHIVE</div>
-      <div class="nav-links">
-        <a href="#new">New</a>
-        <a href="#women">Women</a>
-        <a href="#men">Men</a>
-        <a href="#lookbook">Lookbook</a>
-        <a href="#info">Info</a>
-      </div>
-    </nav>
-  </header>
-
-  <main class="page-wrapper">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-text">
-        <div class="hero-label">Contemporary Select Shop</div>
+      <section class="hero">
+        <div class="hero-topline">FW24 WARDROBE ARCHIVE</div>
         <h1 class="hero-title">
-          LINE ARCHIVE<br />
-          24–25 Season Essentials
+          Daily wearable, <br />quiet luxury mood.
         </h1>
-        <p class="hero-subtitle">
-          일상과 오피스, 그 사이의 미니멀 실루엣.  
-          과하지 않지만 존재감 있는 핏과 소재만 선별해 큐레이션하는 컨템포러리 셀렉샵입니다.
+        <p class="hero-tagline">
+          LINE ARCHIVE는 군더더기 없는 실루엣과 절제된 컬러로 구성된
+          ‘실제 입고 싶은 옷들’만 선별하는 셀렉트 샵입니다.
         </p>
-        <div class="hero-cta-group">
-          <button class="btn-primary">Shop New Arrivals</button>
-          <button class="btn-ghost">View Lookbook</button>
+        <div class="hero-meta">
+          <div class="hero-pill">Minimal tailoring</div>
+          <div class="hero-pill">Layered styling</div>
+          <div class="hero-pill">Seasonal archive</div>
         </div>
-        <p class="hero-note">
-          * 이 페이지는 실제 의류 쇼핑몰을 위한 웹 포트폴리오 샘플입니다.
+        <div class="hero-cta">
+          <button type="button" onclick="scrollToSection('new')">
+            <span class="icon">↓</span>
+            <span>New Collection</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- NEW ARRIVALS -->
+      <section id="new">
+        <h2 class="section-title">New Arrivals</h2>
+        <p class="section-desc">
+          이번 시즌 막 입고된 신상품 라인업입니다. 각 이미지 클릭 시
+          상세 페이지로 이동하여 사이즈 선택 및 구매 흐름을 확인할 수 있습니다.
         </p>
-      </div>
-      <div class="hero-image">
-        <img src="hero.jpg" alt="Minimal fashion editorial photography" />
-        <div class="hero-tag">24–25 Winter Capsule</div>
-      </div>
-    </section>
-
-    <!-- New Arrivals -->
-    <section id="new">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">New Arrivals</h2>
-          <p class="section-sub">이번 시즌 새로 입고된 아카이브 라인입니다.</p>
-        </div>
-        <div class="section-sub">Weekly update · Limited drop</div>
-      </div>
-
-      <div class="grid-3">
-        <a href="product1.html" class="card-link">
-          <article class="product-card">
-            <div class="product-image">
-              <img src="new1.jpg" alt="Minimal tailored coat" />
+        <div class="product-grid">
+          <!-- 상품 1 -->
+          <a href="product1.html" class="product-card">
+            <div class="product-image-wrapper">
+              <img src="new1.jpg" alt="Minimal Wool Jacket" />
             </div>
-            <div class="product-body">
-              <div class="product-name">Minimal Tailored Over Coat</div>
+            <div class="product-info">
+              <div class="product-name">Minimal Wool Jacket</div>
               <div class="product-meta">
-                <span class="price">₩189,000</span>
-                <span class="badge">Unisex</span>
-              </div>
-              <div class="product-meta">
-                <span>울 블렌드 · 와이드 라펠</span>
+                <div class="product-price">₩189,000</div>
+                <div class="product-tag">Unisex Outer</div>
               </div>
             </div>
-          </article>
-        </a>
-
-        <a href="product2.html" class="card-link">
-          <article class="product-card">
-            <div class="product-image">
-              <img src="new2.jpg" alt="Relaxed knit sweater" />
+          </a>
+          <!-- 상품 2 -->
+          <a href="product2.html" class="product-card">
+            <div class="product-image-wrapper">
+              <img src="new2.jpg" alt="Soft Straight Denim" />
             </div>
-            <div class="product-body">
-              <div class="product-name">Soft Volume Knit Sweater</div>
+            <div class="product-info">
+              <div class="product-name">Soft Straight Denim</div>
               <div class="product-meta">
-                <span class="price">₩79,000</span>
-                <span class="badge">Daily</span>
-              </div>
-              <div class="product-meta">
-                <span>크루넥 · 오버핏 실루엣</span>
+                <div class="product-price">₩89,000</div>
+                <div class="product-tag">Daily Denim</div>
               </div>
             </div>
-          </article>
-        </a>
-
-        <a href="product3.html" class="card-link">
-          <article class="product-card">
-            <div class="product-image">
-              <img src="new3.jpg" alt="Straight fit trousers" />
+          </a>
+          <!-- 상품 3 -->
+          <a href="product3.html" class="product-card">
+            <div class="product-image-wrapper">
+              <img src="new3.jpg" alt="Layered Knit Top" />
             </div>
-            <div class="product-body">
-              <div class="product-name">Straight Fit Wool Trousers</div>
+            <div class="product-info">
+              <div class="product-name">Layered Knit Top</div>
               <div class="product-meta">
-                <span class="price">₩98,000</span>
-                <span class="badge">Essential</span>
-              </div>
-              <div class="product-meta">
-                <span>하이웨이스트 · 미니멀 플리츠</span>
+                <div class="product-price">₩79,000</div>
+                <div class="product-tag">Essential Knit</div>
               </div>
             </div>
-          </article>
-        </a>
-      </div>
-    </section>
-
-    <!-- Best Sellers -->
-    <section id="women">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Best Sellers</h2>
-          <p class="section-sub">라인 아카이브에서 가장 많이 선택한 아이템입니다.</p>
+          </a>
         </div>
-        <div class="section-sub">Signature Silhouette</div>
-      </div>
+      </section>
 
-      <div class="grid-3">
-        <article class="product-card">
-          <div class="product-image">
-            <img src="best1.jpg" alt="Long wool coat" />
-          </div>
-          <div class="product-body">
-            <div class="product-name">Long Belted Wool Coat</div>
-            <div class="product-meta">
-              <span class="price">₩215,000</span>
-              <span class="badge">Signature</span>
+      <!-- BEST SELLERS -->
+      <section id="best">
+        <h2 class="section-title">Best Sellers</h2>
+        <p class="section-desc">
+          실제 판매를 가정한 베스트셀러 카테고리입니다. 상세 페이지로 이동해
+          결제 흐름까지 이어지는 구조를 포트폴리오에 보여줄 수 있습니다.
+        </p>
+        <div class="product-grid">
+          <a href="product1.html" class="product-card">
+            <div class="product-image-wrapper">
+              <img src="best1.jpg" alt="Signature Long Coat" />
             </div>
-            <div class="product-meta">
-              <span>허리 벨트 · 미니멀 버튼 디테일</span>
+            <div class="product-info">
+              <div class="product-name">Signature Long Coat</div>
+              <div class="product-meta">
+                <div class="product-price">₩259,000</div>
+                <div class="product-tag">Best Outer</div>
+              </div>
             </div>
-          </div>
-        </article>
-
-        <article class="product-card">
-          <div class="product-image">
-            <img src="best2.jpg" alt="Layered shirts" />
-          </div>
-          <div class="product-body">
-            <div class="product-name">Layered Cotton Shirt Set</div>
-            <div class="product-meta">
-              <span class="price">₩89,000</span>
-              <span class="badge">Set</span>
+          </a>
+          <a href="product2.html" class="product-card">
+            <div class="product-image-wrapper">
+              <img src="best2.jpg" alt="Relaxed Sweat Set" />
             </div>
-            <div class="product-meta">
-              <span>이너용 셔츠 + 오버 셔츠 레이어드</span>
+            <div class="product-info">
+              <div class="product-name">Relaxed Sweat Set</div>
+              <div class="product-meta">
+                <div class="product-price">₩129,000</div>
+                <div class="product-tag">Set-up</div>
+              </div>
             </div>
-          </div>
-        </article>
-
-        <article class="product-card">
-          <div class="product-image">
-            <img src="best3.jpg" alt="Minimal leather bag" />
-          </div>
-          <div class="product-body">
-            <div class="product-name">Square Minimal Leather Bag</div>
-            <div class="product-meta">
-              <span class="price">₩132,000</span>
-              <span class="badge">Accessory</span>
+          </a>
+          <a href="product3.html" class="product-card">
+            <div class="product-image-wrapper">
+              <img src="best3.jpg" alt="Everyday Leather Bag" />
             </div>
-            <div class="product-meta">
-              <span>하드 쉐입 · 크로스 & 토트 2way</span>
+            <div class="product-info">
+              <div class="product-name">Everyday Leather Bag</div>
+              <div class="product-meta">
+                <div class="product-price">₩139,000</div>
+                <div class="product-tag">Accessory</div>
+              </div>
             </div>
-          </div>
-        </article>
-      </div>
-    </section>
+          </a>
+        </div>
+      </section>
 
-    <!-- Lookbook -->
-    <section id="lookbook">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Editorial Lookbook</h2>
-          <p class="section-sub">실제 착장 느낌을 담은 에디토리얼 컷입니다.</p>
+      <!-- LOOKBOOK (간단 텍스트/이미지 예시) -->
+      <section id="lookbook">
+        <h2 class="section-title">Lookbook</h2>
+        <p class="section-desc">
+          bg-main.mp4와 함께 자연스럽게 재생되는 시즌 무드 배경 위에,
+          실제 룩북 영상/이미지로 대체 가능한 섹션입니다.
+        </p>
+        <div class="story-card">
+          FW24 룩북은 “도시와 자연 사이”를 테마로, 코트·데님·니트를 중심으로
+          레이어드한 스타일을 제안합니다. 모델이 천천히 화면을 가로지르는
+          배경 영상(Flow / 힉스필드)을 연결해 실제 상업용 쇼핑몰과 유사한
+          인상을 줄 수 있습니다.
         </div>
-        <div class="section-sub">Studio & Street Mix</div>
-      </div>
+      </section>
 
-      <div class="lookbook-grid">
-        <div class="lookbook-item tall">
-          <img src="look1.jpg" alt="Studio fashion look" />
-        </div>
-        <div class="lookbook-item">
-          <img src="look2.jpg" alt="Street style lookbook" />
-        </div>
-        <div class="lookbook-item">
-          <img src="look3.jpg" alt="Minimal monochrome outfit" />
-        </div>
-        <div class="lookbook-item">
-          <img src="look4.jpg" alt="Editorial close-up shot" />
-        </div>
-      </div>
-    </section>
-
-    <!-- Brand Story -->
-    <section id="men">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Brand Story</h2>
-          <p class="section-sub">클라이언트 의류 브랜드 소개에 바로 활용 가능한 섹션.</p>
-        </div>
-      </div>
-
-      <div class="brand-story">
-        <div>
-          <h3>Between Daily and Formal</h3>
+      <!-- BRAND STORY / INFO -->
+      <section id="story">
+        <h2 class="section-title">Brand Story & Info</h2>
+        <div class="story-card">
           <p>
-            LINE ARCHIVE는 “하루 대부분의 시간을 보내는 옷”에 집중합니다.  
-            출근, 카페, 모임, 퇴근 후의 짧은 산책까지.  
-            어느 상황에서도 과하지 않게, 그러나 분명하게 존재감을 드러낼 수 있는 실루엣을 연구합니다.
+            <strong>LINE ARCHIVE</strong>는 “오래 두고 입을 수 있는” 실루엣만
+            큐레이션하는 셀렉트 샵 포트폴리오입니다. <br /><br />
+            이 페이지는 <strong>GitHub Pages</strong> 기반 정적 사이트로,
+            상품 리스트 → 상세 페이지 → 체크아웃 폼까지의 흐름을 통해
+            실제 전자상거래 환경을 시뮬레이션합니다.
           </p>
           <br />
           <p>
-            시즌마다 급격하게 바뀌는 유행보다, 오랜 기간 반복해서 손이 가는 아카이브를 만드는 것이 목표입니다.
-            그래서 모든 아이템은 직선과 곡선, 여유와 핏, 소재의 결을 기준으로 큐레이션합니다.
+            추후 <strong>PG사 결제 모듈</strong>만 연동하면, 포트폴리오가 아닌
+            실제 판매용 쇼핑몰로 전환 가능한 구조를 목표로 설계되었습니다.
           </p>
         </div>
-        <div class="brand-highlight">
-          “이 섹션 텍스트는 실제 클라이언트 브랜드 스토리로 교체해 사용할 수 있습니다.  
-          구조와 톤앤매너는 유지하고, 내용만 바꾸면 완성도 높은 소개 블록이 됩니다.”
-        </div>
-      </div>
-    </section>
-
-    <!-- Info / Footer -->
-    <section id="info">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Info & Service</h2>
-          <p class="section-sub">실제 쇼핑몰 운영에 필요한 기본 정보 섹션 샘플.</p>
-        </div>
-      </div>
-
-      <div class="info-grid">
-        <div class="info-card">
-          <div class="info-title">배송 안내</div>
-          <p class="info-text">
-            결제 완료 기준 1~3일 이내 출고를 원칙으로 합니다.  
-            예약 상품 및 리오더 상품은 상세 페이지 일정을 우선으로 합니다.
-          </p>
-        </div>
-        <div class="info-card">
-          <div class="info-title">교환 & 반품</div>
-          <p class="info-text">
-            수령 후 7일 이내 Q&A 게시판 또는 카카오 채널로 접수해 주세요.  
-            단순 변심의 경우 왕복 배송비가 발생할 수 있습니다.
-          </p>
-        </div>
-        <div class="info-card">
-          <div class="info-title">고객 센터</div>
-          <p class="info-text">
-            Mon–Fri 11:00–17:00 (Lunch 13:00–14:00)<br />
-            Kakao Channel · @linearchive<br />
-            Email · contact@linearchive.kr
-          </p>
-        </div>
-      </div>
+      </section>
 
       <footer>
-        <div class="footer-bottom">
-          <span>© LINE ARCHIVE · Web Portfolio Sample for Fashion Clients</span>
-          <span>Design & Code by 운규 × 루카</span>
-        </div>
+        © LINE ARCHIVE · Portfolio 02 – Built by OREUMGYEOL (운규 & 루카)
       </footer>
-    </section>
+    </div>
   </main>
 
-  <!-- 음악 자동 재생 + 토글 스크립트 (모바일 터치 대응 포함) -->
   <script>
-    const bgMusic = document.getElementById("bgMusic");
-    const musicToggle = document.getElementById("musicToggle");
-
-    function updateButton() {
-      if (!bgMusic || !musicToggle) return;
-      if (bgMusic.paused) {
-        musicToggle.textContent = "🔇 MUSIC OFF";
-        musicToggle.classList.add("off");
-      } else {
-        musicToggle.textContent = "🔊 MUSIC ON";
-        musicToggle.classList.remove("off");
+    // 섹션 스크롤
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        const rect = el.getBoundingClientRect().top + window.scrollY - 60;
+        window.scrollTo({ top: rect, behavior: "smooth" });
       }
     }
 
-    function safePlay() {
-      if (!bgMusic) return;
-      bgMusic.volume = 0.65; // 볼륨 (0~1)
-      bgMusic.play().then(updateButton).catch(() => {
-        updateButton();
-      });
+    // 음악 자동재생 + 토글
+    const bgMusic = document.getElementById("bg-music");
+    const musicToggle = document.getElementById("music-toggle");
+    const musicLabel = musicToggle.querySelector(".label");
+
+    let isPlaying = false;
+    let userInteracted = false;
+
+    function updateMusicUI() {
+      musicLabel.textContent = isPlaying ? "Music: ON" : "Music: OFF";
+      musicToggle.style.borderColor = isPlaying
+        ? "rgba(164, 219, 255, 0.95)"
+        : "rgba(99, 134, 255, 0.8)";
     }
 
-    function toggleMusic(e) {
-      if (e) e.stopPropagation();
+    function tryPlayMusic() {
       if (!bgMusic) return;
-      if (bgMusic.paused) {
-        safePlay();
+      bgMusic
+        .play()
+        .then(() => {
+          isPlaying = true;
+          updateMusicUI();
+        })
+        .catch(() => {
+          // 모바일 정책으로 실패 시, 사용자 인터랙션 이후에 재시도
+        });
+    }
+
+    musicToggle.addEventListener("click", () => {
+      userInteracted = true;
+      if (!isPlaying) {
+        bgMusic
+          .play()
+          .then(() => {
+            isPlaying = true;
+            updateMusicUI();
+          })
+          .catch(() => {});
       } else {
         bgMusic.pause();
-        updateButton();
+        isPlaying = false;
+        updateMusicUI();
       }
-    }
+    });
 
-    function removeStartListeners() {
-      window.removeEventListener("click", startMusicOnce);
-      window.removeEventListener("scroll", startMusicOnce);
-      window.removeEventListener("keydown", startMusicOnce);
-      window.removeEventListener("touchstart", startMusicOnce);
-      window.removeEventListener("touchend", startMusicOnce);
-    }
+    ["click", "touchstart", "scroll"].forEach((evt) => {
+      window.addEventListener(
+        evt,
+        () => {
+          if (!userInteracted && !isPlaying) {
+            userInteracted = true;
+            tryPlayMusic();
+          }
+        },
+        { once: true }
+      );
+    });
 
-    // 첫 상호작용(PC/모바일)에서 재생 시도
-    function startMusicOnce() {
-      if (!bgMusic || !bgMusic.paused) {
-        removeStartListeners();
-        return;
-      }
-      safePlay();
-      removeStartListeners();
-    }
-
-    // 이벤트 등록 (PC + 모바일 터치 모두 대응)
-    window.addEventListener("click", startMusicOnce);
-    window.addEventListener("scroll", startMusicOnce);
-    window.addEventListener("keydown", startMusicOnce);
-    window.addEventListener("touchstart", startMusicOnce, { passive: true });
-    window.addEventListener("touchend", startMusicOnce, { passive: true });
-
-    if (musicToggle) {
-      musicToggle.addEventListener("click", toggleMusic);
-    }
-
-    document.addEventListener("DOMContentLoaded", updateButton);
+    // PC에서 자동재생 시도
+    window.addEventListener("load", () => {
+      tryPlayMusic();
+    });
   </script>
 </body>
 </html>
