@@ -465,17 +465,17 @@
     @media (max-width: 900px) {
       .page-wrapper {
         padding: 0 14px 40px;
-        max-width: 480px;
+        max-width: 480px;      /* 폰에서 전체 폭 줄이기 */
         margin: 0 auto;
       }
 
       .nav-links {
-        display: none;
+        display: none;         /* 상단 카테고리는 PC 전용 유지 */
       }
 
       .hero {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 20px;
         padding-top: 26px;
       }
 
@@ -487,9 +487,26 @@
         font-size: 13px;
       }
 
+      .hero-image {
+        max-height: 360px;     /* 모바일에서 메인 이미지 너무 길지 않게 */
+      }
+
+      /* 👉 상품 카드: 2열로 한눈에 보이게 */
       .grid-3 {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 14px;
+      }
+
+      .product-body {
+        padding: 10px 10px 11px;
+      }
+
+      .product-name {
+        font-size: 13px;
+      }
+
+      .product-meta {
+        font-size: 11px;
       }
 
       .lookbook-grid {
@@ -516,6 +533,13 @@
         right: 16px;
         padding: 6px 12px;
         font-size: 10px;
+      }
+    }
+
+    /* 아주 작은 화면에서(예: 360px) 카드가 너무 빡빡하면 1열로 */
+    @media (max-width: 420px) {
+      .grid-3 {
+        grid-template-columns: 1fr;
       }
     }
   </style>
